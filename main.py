@@ -45,13 +45,6 @@ for i_episode in itertools.count(1):
             for i in range(args.updates_per_step):
                 # Update parameters of all the networks
                 critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = agent.update_parameters(memory, args.batch_size, updates)
-
-                print(f'updates : {updates}')
-                print(f'loss/critic_1 : {critic_1_loss}')
-                print(f'loss/critic_2 : {critic_2_loss}')
-                print(f'loss/policy : {policy_loss}')
-                print(f'loss/entropy_loss : {ent_loss}')
-                print(f'entropy_temprature/alpha : {alpha}')
                 updates += 1
 
         next_state, reward, done, _ = env.step(action) # Step
@@ -70,7 +63,6 @@ for i_episode in itertools.count(1):
     if total_numsteps > args.num_steps:
         break
 
-    writer.add_scalar('reward/train', episode_reward, i_episode)
     print("Episode: {}, total numsteps: {}, episode steps: {}, reward: {}".format(i_episode, total_numsteps, episode_steps, round(episode_reward, 2)))
 
     if i_episode % 10 == 0 and args.eval is True:
@@ -90,9 +82,6 @@ for i_episode in itertools.count(1):
                 state = next_state
             avg_reward += episode_reward
         avg_reward /= episodes
-
-
-        writer.add_scalar('avg_reward/test', avg_reward, i_episode)
 
         print("----------------------------------------")
         print("Test Episodes: {}, Avg. Reward: {}".format(episodes, round(avg_reward, 2)))
