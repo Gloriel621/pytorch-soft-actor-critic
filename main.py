@@ -1,8 +1,5 @@
-import argparse
-import datetime
 import gym
 import numpy as np
-import itertools
 import torch
 from sac import SAC
 from args import Arguments
@@ -28,7 +25,7 @@ memory = ReplayMemory(args.replay_size, args.seed)
 total_numsteps = 0
 updates = 0
 
-for i_episode in itertools.count(1):
+for i_episode in range(args.num_steps):
     episode_reward = 0
     episode_steps = 0
     done = False
@@ -59,9 +56,6 @@ for i_episode in itertools.count(1):
         memory.push(state, action, reward, next_state, mask) # Append transition to memory
 
         state = next_state
-
-    if total_numsteps > args.num_steps:
-        break
 
     print("Episode: {}, total numsteps: {}, episode steps: {}, reward: {}".format(i_episode, total_numsteps, episode_steps, round(episode_reward, 2)))
 
