@@ -1,0 +1,38 @@
+from typing_extensions import TypeVarTuple
+
+
+class Arguments:
+    def __init__(self, 
+    env_name = "HalfCheetah-v2",
+    eval = True,
+    gamma = 0.99,
+    tau = 0.005,
+    lr = 0.0003,
+    alpha = 0.2,
+    automatic_entropy_tuning = False,
+    seed = 1222621,
+    batch_size = 256,
+    num_steps = 100001,
+    hidden_size = 256,
+    updates_per_step = 1,
+    start_step = 10000,
+    target_update_interval = 1,
+    replay_size = 1000000,
+    cuda = False
+    ):
+        self.env_name = env_name
+        self.eval = eval
+        self.gamma = gamma
+        self.tau = tau
+        self.lr = lr
+        self.alpha = alpha
+        self.automatic_entropy_tuning = automatic_entropy_tuning
+        self.seed = seed
+        self.batch_size = batch_size
+        self.num_steps = num_steps
+        self.hidden_size = hidden_size
+        self.updates_per_step = updates_per_step
+        self.start_step = start_step
+        self.target_update_interval = target_update_interval
+        self.replay_size = replay_size
+        self.cuda = cuda
