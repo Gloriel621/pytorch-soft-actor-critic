@@ -6,7 +6,6 @@ import itertools
 import torch
 from sac import SAC
 from args import Arguments
-from torch.utils.tensorboard import SummaryWriter
 from replay_memory import ReplayMemory
 
 args = Arguments()
@@ -21,10 +20,6 @@ np.random.seed(args.seed)
 
 # Agent
 agent = SAC(env.observation_space.shape[0], env.action_space, args)
-
-#Tesnorboard
-writer = SummaryWriter('runs/{}_SAC_{}_{}_{}'.format(datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S"), args.env_name,
-                                                             args.policy, "autotune" if args.automatic_entropy_tuning else ""))
 
 # Memory
 memory = ReplayMemory(args.replay_size, args.seed)
@@ -51,11 +46,12 @@ for i_episode in itertools.count(1):
                 # Update parameters of all the networks
                 critic_1_loss, critic_2_loss, policy_loss, ent_loss, alpha = agent.update_parameters(memory, args.batch_size, updates)
 
-                writer.add_scalar('loss/critic_1', critic_1_loss, updates)
-                writer.add_scalar('loss/critic_2', critic_2_loss, updates)
-                writer.add_scalar('loss/policy', policy_loss, updates)
-                writer.add_scalar('loss/entropy_loss', ent_loss, updates)
-                writer.add_scalar('entropy_temprature/alpha', alpha, updates)
+                print(f'updates : {updates}')
+                print(f'loss/critic_1 : {critic_1_loss}')
+                print(f'loss/critic_2 : {critic_2_loss}')
+                print(f'loss/policy : {policy_loss}')
+                print(f'loss/entropy_loss : {ent_loss}')
+                print(f'entropy_temprature/alpha : {alpha}')
                 updates += 1
 
         next_state, reward, done, _ = env.step(action) # Step
