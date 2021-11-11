@@ -8,7 +8,7 @@ Learning with a Stochastic Actor](https://arxiv.org/pdf/1801.01290.pdf) -> [SAC_
 
 ### Requirements
 ------------
-*   [mujoco-py](https://pybullet.org/)
+*   [pybullet](https://pybullet.org/)
 *   [PyTorch](http://pytorch.org/)
 
 ### Default Arguments and Usage
