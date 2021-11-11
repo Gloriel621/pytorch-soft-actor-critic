@@ -6,7 +6,7 @@ from sac import SAC
 from args import Arguments
 from replay_memory import ReplayMemory
 
-args = Arguments()
+args = Arguments(cuda = True)
 # Environment
 # env = NormalizedActions(gym.make(args.env_name))
 env = gym.make(args.env_name)
@@ -76,7 +76,7 @@ for i_episode in range(args.num_steps):
             avg_reward += episode_reward
         avg_reward /= episodes
 
-        print("Episodes: {}, total numsteps: {}, episode steps: {}, Avg. Reward: {}".format(i_episode, total_numsteps, episode_steps, round(avg_reward, 2)))
+        print("Episodes: {}, total numsteps: {}, episode steps: {}, Avg Reward: {}".format(i_episode, total_numsteps, episode_steps, round(avg_reward, 2)))
 
 
 env.close()
