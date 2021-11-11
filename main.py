@@ -8,7 +8,6 @@ from replay_memory import ReplayMemory
 
 args = Arguments(cuda = True)
 # Environment
-# env = NormalizedActions(gym.make(args.env_name))
 env = gym.make(args.env_name)
 env.seed(args.seed)
 env.action_space.seed(args.seed)
