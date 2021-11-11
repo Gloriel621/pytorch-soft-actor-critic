@@ -1,6 +1,6 @@
 class Arguments:
     def __init__(self, 
-    env_name = "HalfCheetah-v2",
+    env_name = "InvertedPendulumBulletEnv-v0",
     eval_ = True,
     gamma = 0.99,
     tau = 0.005,

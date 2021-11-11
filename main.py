@@ -1,4 +1,5 @@
 import gym
+import pybullet_envs
 import numpy as np
 import torch
 from sac import SAC
@@ -49,15 +50,13 @@ for i_episode in range(args.num_steps):
         total_numsteps += 1
         episode_reward += reward
 
-        # Ignore the "done" signal if it comes from hitting the time horizon.
-        # (https://github.com/openai/spinningup/blob/master/spinup/algos/sac/sac.py)
         mask = 1 if episode_steps == env._max_episode_steps else float(not done)
 
         memory.push(state, action, reward, next_state, mask) # Append transition to memory
 
         state = next_state
 
-    print("Episode: {}, total numsteps: {}, episode steps: {}, reward: {}".format(i_episode, total_numsteps, episode_steps, round(episode_reward, 2)))
+    #print("Episode: {}, total numsteps: {}, episode steps: {}, reward: {}".format(i_episode, total_numsteps, episode_steps, round(episode_reward, 2)))
 
     if i_episode % 10 == 0 and args.eval is True:
         avg_reward = 0.
@@ -77,9 +76,8 @@ for i_episode in range(args.num_steps):
             avg_reward += episode_reward
         avg_reward /= episodes
 
-        print("----------------------------------------")
-        print("Test Episodes: {}, Avg. Reward: {}".format(episodes, round(avg_reward, 2)))
-        print("----------------------------------------")
+        print("Episodes: {}, total numsteps: {}, episode steps: {}, Avg. Reward: {}".format(i_episode, total_numsteps, episode_steps, round(avg_reward, 2)))
+
 
 env.close()
 

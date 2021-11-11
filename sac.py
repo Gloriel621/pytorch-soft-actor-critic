@@ -13,7 +13,6 @@ class SAC(object):
         self.tau = args.tau
         self.alpha = args.alpha
 
-        self.policy_type = args.policy
         self.target_update_interval = args.target_update_interval
         self.automatic_entropy_tuning = args.automatic_entropy_tuning
 
